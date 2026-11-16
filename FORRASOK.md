@@ -27,3 +27,8 @@ Allergénjelölések értelmezéséhez:
 - CUH NHS, búzaeredetű gluténmentes keményítő: https://www.cuh.nhs.uk/patient-information/cows-milk-and-wheat-free-diet/
 
 Ezek az értelmezési szabályokat támogatják; a program nem állítja, hogy egy címkefotó alapján minden allergén kizárható. A forráslinkekhez internet kell; az elemzés és a leírások helyben működnek.
+
+## 1.5 vonalkód
+- Open Food Facts API: https://openfoodfacts.github.io/openfoodfacts-server/api/ ; terméklekérdezés: https://openfoodfacts.github.io/documentation/docs/Product-Opener/v2/products/get-product-by-code/
+- Termékadatok: Open Food Facts, ODbL: https://opendatacommons.org/licenses/odbl/summary/index.html . Az alkalmazás minden találatnál jelzi a forrást és az adatlap linkjét. Nincs a ZIP-be csomagolt termékadatbázis.
+- Helyi kamerás és képi vonalkódfelismerés: @zxing/browser 0.1.5; https://github.com/zxing-js/browser ; https://github.com/zxing-js/library . A könyvtárak licencei a vendor/barcode mappában találhatók.

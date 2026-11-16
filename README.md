@@ -1,4 +1,4 @@
-# Ételkisokos 1.4 – Értsd, mit eszel.
+# Ételkisokos 1.5 – Értsd, mit eszel.
 
 Teljes, önálló statikus webapp. Nem szükséges npm-telepítés vagy API-kulcs.
 
@@ -24,7 +24,7 @@ A saját domain a tárhelyen kapcsolható be. Az etelkisokos.hu regisztrációj�
 - Profil, saját E-szám kerülőlista, gyermek-színezék és PKU figyelmeztetés; JSON export/import.
 - Legfeljebb 50 előzmény a böngésző helyi tárában.
 - PWA-manifest és minden OCR-fájlt tartalmazó offline gyorsítótár.
-- Külön, internetet igénylő Open Food Facts vonalkódszámos keresés. Nem kamerás vonalkódolvasó.
+- Kamerás és kézzel megadott vonalkód alapján működő Open Food Facts termékkeresés; vonalkódfotó felismerés is elérhető. A lekérdezéshez internet szükséges.
 
 ## Offline és adatkezelés
 A szöveges elemzés és a helyi OCR internet nélkül is működik, ha a helyi szerver elérhető vagy a böngésző az összes fájlt gyorsítótárazta. Telefonon első alkalommal HTTPS-en, internetkapcsolattal nyisd meg; várd meg az „Offline használatra kész” jelzést. Az offline tárolás böngészőfüggő, törölhető. A telepítés gombja a böngésző menüjében jelenhet meg.
@@ -59,3 +59,17 @@ Felülírás után Ctrl+F5. A borító a kép méretarányát megőrzi; nagy ké
 A szabályok nem teljes nyelvi vagy allergénértékelést valósítanak meg. Összetett tagadások, szokatlan megfogalmazás, nem támogatott szinonima, OCR-hiba vagy több oszlopból rossz sorrendben kiolvasott szöveg hibás eredményt adhat. A „mentes” panel a beolvasott állítást mutatja, nem igazolja azt. Az eredeti csomagolás továbbra is ellenőrzendő.
 
 Frissítés: a ZIP etelkisokos mappájának teljes tartalmát másold az F:\etelkisokos mappába felülírással. A változat az elemzo.js új fájlt is tartalmazza. Utána Ctrl+F5, majd Git add/commit/push. Az új funkciók saját böngészőn belül működnek, nincs új API-kulcs vagy előfizetés.
+
+## 1.5 – Vonalkód az első lépés
+A menüben a Termék beolvasása nyitja az új folyamatot.
+1. Kamera indítása → tartsd a teljes vonalkódot a képbe. A sikeres beolvasás leállítja a kamerát és elindítja a termékkeresést.
+2. Nézd meg a termék nevét és a betöltött összetevőket. Az alkalmazás nem kezdi el automatikusan az egészségügyi vagy allergénértékelést; kézi ellenőrzés után az Összetevők áttekintése gombbal folytathatsz.
+3. Hiányzó vagy hiányos terméknél Címkefotózással folytatom gomb jelenik meg. A korábbi helyi OCR és kézi szövegbevitel megmaradt.
+
+A vonalkód kézzel is beírható, illetve a Vonalkódot tartalmazó fotót választanék lehetőséggel képről is felismerhető. Az olvasó EAN-13, EAN-8, UPC-A és ITF kódot keres; a termékkeresés csak 8/12/13/14 számjegyű, ellenőrző számjeggyel validált GTIN-t fogad el. UPC-E és QR nem támogatott. Az elsődleges kamera hátsó kamera, de az eszköz/böngésző választása eltérhet. ZXing-alapú helyi olvasó; nem függ a böngésző BarcodeDetector támogatásától.
+
+Kamera: HTTPS vagy localhost, böngészőengedély szükséges. Nem küldünk kameraképet külső elemzőnek. Csak a felismert vagy kézzel megadott vonalkód kerül az Open Food Facts-hoz. Az adatlapot az app nem tölti le újra automatikus ciklusban. Menüből kilépve, háttérbe helyezve vagy sikeres találatkor a kamerát leállítjuk; a régi hálózati válasz nem írhatja felül az új keresést.
+
+Nem minden magyar termék van benne a közösségi adatbázisban. A receptúra és a régiós csomagolás eltérhet. Magyar összetevőt választunk elsőként, utána angolt, majd a rendelkezésre álló eredeti szöveget; nem magyar vagy ismeretlen nyelvnél külön figyelmeztetés és fotós továbblépés jelenik meg. Nincs automatikus fordítás, a helyi elemző nyelvi lefedettsége korlátozott.
+
+Az offline kész jelzés a helyi funkciók és motorok betöltésére vonatkozik; a termékadatbázis lekérdezése továbbra is internetet igényel. Új API-kulcs vagy csomagtelepítés nem szükséges, a vonalkódolvasó is a ZIP része.
