@@ -27,3 +27,10 @@ Sikeres: GTIN-hossz és ellenőrző számjegy; kézi bevitel normalizálása; ma
 Valódi böngészős ellenőrzés: a csomagolt ZXing motor egy külön generált, éles EAN-13 tesztképről helyesen olvasta ki a 3017620422003 kódot. Az új appfelületen ugyanezzel a kézzel megadott kóddal az éles Open Food Facts adatbázis terméket és összetevőlistát adott. A termék neve, a forrás, a nem magyar nyelvre vonatkozó figyelmeztetés és az összetevők szerkeszthetően megjelentek. A Címkefotózással folytatom gomb megnyitotta a helyi OCR-es címkeeszközöket. Offline kész állapot látható volt.
 
 Az élő telefonkamera nincs fizikailag ellenőrizve. A kameraengedély, fókusz, megvilágítás és az eszköz választása valós eszközön tesztelendő. Az éles termékadatbázisban nem minden magyar termék található meg; a teszt egyetlen ismert termékkel igazolta a lekérdezés működését, nem általános adatminőségi mérés. Az offline jelzés nem jelenti az online termékkeresés offline elérhetőségét.
+
+## 1.6 – mentett termékek és összehasonlítás
+- Automatizált tesztek: mentés, visszatöltés, kedvencek, megjegyzések, keresés, két termék összevetése, aktuális profil szerinti újraértékelés.
+- Ellenőrizve: ismételt vonalkódos mentés frissítése, 200 termékes korlát, hibás tárolt adatok és tárhelyhiba kezelése, felhasználói szöveg biztonságos megjelenítése.
+- Böngészőben végigpróbálva: két termék rögzítése, kedvenc és megjegyzés mentése, új adatlap ürítése, kijelölés és összehasonlító táblázat.
+- A mentett termékek csak az adott böngészőben tárolódnak; nincs eszközök közötti szinkron. A profil exportja nem tartalmazza őket.
+- Az összehasonlítás a mentett szövegből felismert adatokat mutatja, nem egészségügyi rangsor.

@@ -1,4 +1,4 @@
-# Ételkisokos 1.5 – Értsd, mit eszel.
+# Ételkisokos 1.6 – Értsd, mit eszel.
 
 Teljes, önálló statikus webapp. Nem szükséges npm-telepítés vagy API-kulcs.
 
@@ -73,3 +73,14 @@ Kamera: HTTPS vagy localhost, böngészőengedély szükséges. Nem küldünk ka
 Nem minden magyar termék van benne a közösségi adatbázisban. A receptúra és a régiós csomagolás eltérhet. Magyar összetevőt választunk elsőként, utána angolt, majd a rendelkezésre álló eredeti szöveget; nem magyar vagy ismeretlen nyelvnél külön figyelmeztetés és fotós továbblépés jelenik meg. Nincs automatikus fordítás, a helyi elemző nyelvi lefedettsége korlátozott.
 
 Az offline kész jelzés a helyi funkciók és motorok betöltésére vonatkozik; a termékadatbázis lekérdezése továbbra is internetet igényel. Új API-kulcs vagy csomagtelepítés nem szükséges, a vonalkódolvasó is a ZIP része.
+
+## 1.6 – Mentett termékek, kedvencek, összehasonlítás
+A termék ellenőrzésekor a Mentés termékeimhez gombbal menthető az összetevőlista. Előtte a Kedvencként mentem jelölőnégyzet és a Saját megjegyzés mező is kitölthető. Mentéshez legalább 5 karakteres összetevőlista szükséges.
+
+A Mentett termékek menüben név, vonalkód vagy megjegyzés szerint kereshetsz, illetve bekapcsolhatod a Csak a kedvenceim szűrőt. A csillag gomb a kedvenc jelölést váltja. A saját megjegyzés a termékkártyán szerkeszthető. Megnyitáskor az elmentett összetevőlista az aktuális profil szerint elemezhető, új adatbázis-lekérdezés nélkül. Ugyanazzal a vonalkóddal újramentve a meglévő termék frissül; a mentett termék megnyitása után a Mentés gomb szintén azt a bejegyzést frissíti. Új, másik kézi termékhez az Új termék kezdése gombot használd.
+
+Két terméken kattints az Összehasonlításhoz gombra, majd felül az Összehasonlítás (2/2) gombra. A táblázatban a közvetlen összetevő- és nyomokban találatok, saját profil szerinti egyezések, kerülendő kódok, adalékanyagok, közös/eltérő felismert kódok, mentes állítások, megjegyzések és a teljes mentett szöveg vethetők össze. Mobilon a táblázat vízszintesen görgethető. Az összevetés nem egészségpontszám, nem rangsor és nem fogyaszthatósági minősítés.
+
+A termékeket és megjegyzéseket ezen a készüléken, ebben a böngészőben tároljuk (etel-products-v1), legfeljebb 200 termékig. Nem kerülnek szerverre és nem szinkronizálódnak eszközök között. Böngészőadatok törlésekor vagy a böngésző tárhelyének eltávolításakor elveszhetnek. A profil exportálása nem exportálja a mentett termékeket. Tárhelyhiba esetén a program nem állítja, hogy a mentés sikerült. A termék törlése megerősítést kér és a termék megjegyzését is törli; az előzmények külön adatok.
+
+Frissítés: a ZIP etelkisokos mappájának teljes tartalmát másold az F:\etelkisokos mappába felülírással, az új termekek.js fájllal együtt. A profil és a korábbi előzmények megmaradnak. Ctrl+F5, majd Git add/commit/push. A tesztekhez: npm test (nem igényel npm installt), vagy külön node tests.js és node tests-products.js.
