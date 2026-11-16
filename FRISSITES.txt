@@ -1,0 +1,5 @@
+Ételkisokos 1.3.1 – borítófelirat
+
+Csak a borító alatti Ételkisokos · Értsd, mit eszel. felirat változott: asztali nézetben 20 px, mobilon 18 px, erősebb betű és sötétzöld szín. A mobilos elrejtést megszüntettük. Az app lábléce változatlan.
+
+Az index.html és sw.js fájlt másold az F:\etelkisokos mappába felülírással. Ezután Ctrl+F5. Git-feltöltéshez használd a válaszban szereplő parancsokat. Ez javítócsomag: a korábbi teljes app mellé kell bemásolni.

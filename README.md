@@ -1,4 +1,4 @@
-# Ételkisokos 1.3 – Értsd, mit eszel.
+# Ételkisokos 1.4 – Értsd, mit eszel.
 
 Teljes, önálló statikus webapp. Nem szükséges npm-telepítés vagy API-kulcs.
 
@@ -19,7 +19,7 @@ A saját domain a tárhelyen kapcsolható be. Az etelkisokos.hu regisztrációj�
 - Felismert szöveg javítása elemzés előtt.
 - 3 és 4 számjegyes E-kódok, betű- és római számos altípusok; ismétlődések szűrése.
 - 339 kód és név a hivatalos magyar uniós jegyzék 2025-11-04-i állapotából.
-- 24 gyakori tételhez bővebb technológiai magyarázat; a többi tételnél a címke szerinti szerepet kell ellenőrizni.
+- 131 tételhez bővebb technológiai magyarázat; a többi tételnél a címke szerinti szerepet kell ellenőrizni.
 - Allergén-kulcsszavak keresése; külön kezelt tartalmazhat / nyomokban rész.
 - Profil, saját E-szám kerülőlista, gyermek-színezék és PKU figyelmeztetés; JSON export/import.
 - Legfeljebb 50 előzmény a böngésző helyi tárában.
@@ -44,3 +44,18 @@ A választott 3-as logó alapján kis méretre egyszerűsített, átlátszó há
 ## 1.3 – Könyvborítós nyitóképernyő
 Az 1-es, világos természetközeli borító nyitja az alkalmazást. A képen látható belépőgomb mögött valódi HTML-gomb működik, billentyűzettel és képernyőolvasóval is elérhető. A mintasorszám a megjelenítésből ki van takarva. A Borító megnyitása gombbal visszaléphetsz. Új, alapcímről indított látogatáskor megjelenik; közvetlen funkciólink esetén az adott oldal nyílik. A borító az offline csomag része.
 Felülírás után Ctrl+F5. A borító a kép méretarányát megőrzi; nagy képernyőn könyvformátumú panel, mobilon a kijelzőhöz illesztett nézet.
+
+## 1.4 – Bővebb kisokos és pontosabb szövegértelmezés
+- 339 hivatalos alapkód + az E500(ii) pontosított altípus: összesen 340 kereshető rekord.
+- 131 részletes, technológiai szerepet magyarázó leírás, megnyitható hivatalos forráshivatkozásokkal. A szerep közérthető szerkesztői összefoglaló; a konkrét termékben betöltött funkciót a címke határozza meg. Az engedélyezési névjegyzék 2025-11-04-i pillanatképe nem frissült újabb jogállapotra.
+- Ismert teljes nevek és felvett szinonimák felismerése: például citromsav, xantángumi, lecitin, szódabikarbóna. Az általános „módosított keményítő” megnevezésből nem talál ki egy konkrét kódot. A névfelismerés nem tetszőleges ragozott vagy hibás OCR-szöveg megértése.
+- Találati bizonyíték: E-szám alapján / név alapján. A névvel megtalált anyag a kerülőlistába is beleszámít.
+- A mentes állításokat és a támogatott tagadó szerkezeteket külön kezeli. A „tejmentes” nem lesz automatikusan tej-találat, de egy másik helyen megadott tejport vagy nyomokban jelölést nem rejt el.
+- Tejsav és tejsavópor, glutamát és glutén elkülönítése. Laktózmentes tej mellett megmarad a tej-találat.
+- Többsoros „nyomokban” mondatok és a mondat után következő összetevőlista külön kezelése.
+- Új Névfelismerés példája gomb és Csak bővebb magyarázattal keresőszűrő.
+- Megmaradt a világos könyvborító és a nagyított alsó felirat (asztalon 20 px, mobilon 18 px).
+
+A szabályok nem teljes nyelvi vagy allergénértékelést valósítanak meg. Összetett tagadások, szokatlan megfogalmazás, nem támogatott szinonima, OCR-hiba vagy több oszlopból rossz sorrendben kiolvasott szöveg hibás eredményt adhat. A „mentes” panel a beolvasott állítást mutatja, nem igazolja azt. Az eredeti csomagolás továbbra is ellenőrzendő.
+
+Frissítés: a ZIP etelkisokos mappájának teljes tartalmát másold az F:\etelkisokos mappába felülírással. A változat az elemzo.js új fájlt is tartalmazza. Utána Ctrl+F5, majd Git add/commit/push. Az új funkciók saját böngészőn belül működnek, nincs új API-kulcs vagy előfizetés.

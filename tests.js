@@ -4,7 +4,7 @@ assert.equal(kodNormalizal('E 1105'),'E-1105');assert.equal(kodNormalizal('E-160
 for(const input of [null,[],{verzio:1,szurok:null},{verzio:1,szurok:{elkeruloKodok:'E120'}},{verzio:2,szurok:{}}])assert.throws(()=>profilEllenoriz(input));
 const p=alapProfil();p.szurok.elkeruloKodok=['E-120'];assert.equal(eszamSzuro({kod:'E120'},p),'tilos');assert.equal(termekErtekeles([{kod:'E120'},{kod:'E330'}],p),'problema');p.szurok.szulok=true;assert.equal(eszamSzuro({kod:'E102'},p),'kerdojel');assert.equal(eszamSzuro({kod:'E133'},p),'ok');p.szurok.csoportok=['Fenilketonuriások (PKU)'];assert.equal(eszamSzuro({kod:'E951'},p),'kerdojel');assert.equal(eszamSzuro({kod:'E969'},p),'ok');
 const nodes=new Map();const node=id=>{if(!nodes.has(id))nodes.set(id,{value:'',innerHTML:'',textContent:'',style:{},classList:{toggle(){},contains(){return true}},querySelectorAll(){return[]},querySelector(){return {focus(){}}},focus(){},addEventListener(){},scrollIntoView(){}});return nodes.get(id)};
-const context={document:{body:{classList:{add(){},remove(){}}},getElementById:node,querySelectorAll:()=>[],addEventListener(){}},localStorage:{getItem:()=>null,setItem(){}},location:{hash:'#home',protocol:'file:'},navigator:{},window:{scrollTo(){},addEventListener(){}},console,URL,Blob,setTimeout,confirm:()=>false};vm.createContext(context);for(const f of ['eszamok.js','profil.js','app.js'])vm.runInContext(fs.readFileSync(f,'utf8'),context,{filename:f});
+const context={document:{body:{classList:{add(){},remove(){}}},getElementById:node,querySelectorAll:()=>[],addEventListener(){}},localStorage:{getItem:()=>null,setItem(){}},location:{hash:'#home',protocol:'file:'},navigator:{},window:{scrollTo(){},addEventListener(){}},console,URL,Blob,setTimeout,confirm:()=>false};vm.createContext(context);for(const f of ['eszamok.js','profil.js','elemzo.js','app.js'])vm.runInContext(fs.readFileSync(f,'utf8'),context,{filename:f});
 const inspect=s=>JSON.parse(JSON.stringify(vm.runInContext('inspect('+JSON.stringify(s)+')',context)));
 assert.deepEqual(inspect('E330, e-330 E 1105 E160a(i) E-1450').codes,['E330','E1105','E160A(I)','E1450']);assert.deepEqual(inspect('E12345').codes,[]);assert.deepEqual(inspect('TEJ, tojás. Nyomokban földimogyorót tartalmazhat.').found,[1,2]);assert.deepEqual(inspect('TEJ, tojás. Nyomokban földimogyorót tartalmazhat.').trace,[3]);
 assert.equal(vm.runInContext('ESZAM_NEVEK["E-249"]',context),'Kálium-nitrit');assert.equal(vm.runInContext('ESZAM_NEVEK["E-250"]',context),'Nátrium-nitrit');assert.match(vm.runInContext('ESZAM_NEVEK["E-999"]',context),/Quillaja/i);assert.equal(vm.runInContext('Object.keys(ESZAM_NEVEK).length',context),339);
@@ -14,3 +14,55 @@ const sw=fs.readFileSync('sw.js','utf8');const assets=JSON.parse(sw.match(/const
 console.log('Minden ellenőrzés sikeres: profil, import, parser, allergének, tiltólista, gyermekfigyelmeztetés, XSS-védelem, 339 hivatalos név, helyi OCR-fájlok.');
 
 vm.runInContext('showCover()',context);assert.equal(node('bookCover').hidden,false);vm.runInContext("document.getElementById('coverEnter').onclick()",context);assert.equal(node('bookCover').hidden,true);vm.runInContext("document.getElementById('coverReturn').onclick()",context);assert.equal(node('bookCover').hidden,false);console.log('Borító megnyitása, belépőgomb és visszalépés: sikeres.');
+
+// Valós címkékre jellemző, egymástól eltérő pozitív és negatív esetek.
+assert.deepEqual(inspect('Összetevők: citromsav, xantángumi, napraforgólecitin.').codes,['E330','E415','E322']);
+assert.deepEqual(inspect('citromsav (E330), citromsav, e-330').codes,['E330']);
+assert.deepEqual(inspect('Tartósítószer: kálium-szorbát; édesítőszer: aszpartám.').codes,['E202','E951']);
+assert.deepEqual(inspect('aszpartám-aceszulfám só').codes,['E962']);
+assert.deepEqual(inspect('szódabikarbóna').codes,['E500(II)']);
+assert.deepEqual(inspect('Savanyúságot szabályozó anyag: nátrium-hidrogén-karbonát.').codes,['E500(II)']);
+assert.deepEqual(inspect('Modified starch, módosított keményítő, színezék.').codes,[]);
+assert.deepEqual(inspect('Citromsavas üdítő, citromsavmentes keksz.').codes,[]);
+assert.deepEqual(inspect('Nem tartalmaz citromsavat vagy kálium-szorbátot.').codes,[]);
+assert.deepEqual(inspect('Tejmentes. Tojásmentes. Szójamentes. Gluténmentes.').found,[]);
+assert.deepEqual(inspect('Tejmentes. Összetevők: TEJPOR, cukor.').found,[1]);
+assert.deepEqual(inspect('Laktózmentes tej.').found,[1]);assert.ok(inspect('Laktózmentes tej.').notes.some(n=>n.includes('tejfehérjementest')));
+assert.deepEqual(inspect('Gluténmentes búzakeményítő.').found,[0]);
+assert.deepEqual(inspect('Összetevők: tejsav, nátrium-laktát, kakaóvaj, kókusztej.').found,[]);
+assert.deepEqual(inspect('Összetevők: tej, kakaóvaj, tejsav.').found,[1]);
+assert.deepEqual(inspect('Tej- és tojásmentes.').found,[]);
+assert.deepEqual(inspect('Tej és tojás nélkül.').found,[]);
+assert.deepEqual(inspect('Nem tartalmaz tejet és tojást.').found,[]);
+assert.deepEqual(inspect('Tejet, tojást nem tartalmaz.').found,[]);
+assert.deepEqual(inspect('Tejmentes. Nyomokban tejet tartalmazhat.').trace,[1]);
+assert.deepEqual(inspect('Nyomokban tejet tartalmazhat. Összetevők: tojás, cukor.').found,[2]);
+assert.deepEqual(inspect('Nyomokban tejet tartalmazhat. Összetevők: tojás, cukor.').trace,[1]);
+assert.deepEqual(inspect('Nem tartalmaz tejet, de szóját tartalmaz.').found,[5]);
+assert.deepEqual(inspect('Összetevők: kén-dioxid, szén-dioxid.').found,[13]);
+assert.deepEqual(inspect('Összetevők: E-223.').found,[13]);
+assert.deepEqual(inspect('Nyomokban szulfitokat tartalmazhat.').trace,[13]);
+assert.deepEqual(inspect('Mononátrium-glutamát, MSG, gluténmentes.').found,[]);
+assert.deepEqual(inspect('Lecitin, E322.').found,[]);
+assert.deepEqual(inspect('Szójalecitin.').found,[5]);
+assert.deepEqual(inspect('E133, halal, szilícium-dioxid, vajbab.').found,[]);
+assert.deepEqual(inspect('Tartalmaz: hal, rák, dió, földimogyoró.').found,[3,4,6,7]);
+assert.deepEqual(inspect('E3300 E12345 E322 E-1105').codes,['E3300','E322','E1105']);
+vm.runInContext("aktivProfil.szurok.elkeruloKodok=['E-330'];renderResult('Összetevők: citromsav.','Névteszt')",context);assert.match(node('result').innerHTML,/saját kerülőlistádon/);assert.match(node('result').innerHTML,/Név alapján/);assert.match(node('result').innerHTML,/Források/);
+vm.runInContext("document.getElementById('detailedOnly').checked=true;renderDict()",context);assert.match(node('dictCount').textContent,/131 találat/);
+console.log('1.4: névfelismerés, ismétlődések, tagadások, mentes állítások, laktóz/tej és glutamát/glutén elkülönítése, szulfitok, kerülőlista és forráshivatkozások: sikeres.');
+
+assert.deepEqual(inspect('Összetevők: tejsavópor, savófehérje, tejsav.').found,[1]);
+assert.deepEqual(inspect('Nyomokban tartalmazhat: tejet,\ntojást,\nszulfitokat.').trace,[1,2,13]);
+assert.deepEqual(inspect('Nyomokban tartalmazhat: tejet,\ntojást,\nszulfitokat.').found,[]);
+assert.deepEqual(inspect('E330 nélkül. Nem tartalmaz E202-t. E951-mentes.').codes,[]);
+assert.deepEqual(inspect('Nem tartalmaz citromsavat, de kálium-szorbátot tartalmaz.').codes,['E202']);
+assert.deepEqual(inspect('Nyomokban E-223-at tartalmazhat.').trace,[13]);
+assert.deepEqual(inspect('Nyomokban E-223-at tartalmazhat.').found,[]);
+assert.deepEqual(inspect('Diós keksz.').found,[4]);
+console.log('További ellenőrzések: többsoros nyomokban jelölés, tejsavó/tejsav, tagadott E-kódok: sikeres.');
+
+assert.equal(inspect('citromsav').evidence.E330.length,1);
+assert.deepEqual(inspect('Összetevők: cukor, karamell, víz.').codes,[]);
+assert.deepEqual(inspect('Színezék: karamell.').codes,['E150A']);
+assert.deepEqual(inspect('lactose-free. Ingredients: sugar, lactic acid.').found,[]);

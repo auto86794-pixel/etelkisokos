@@ -441,3 +441,1233 @@ var ESZAM_LEIRASOK = {
   ]
 };
 var ESZAM_INDEX = Object.fromEntries(Object.entries(ESZAM_NEVEK).map(([kod,nev])=>[kod,{kod,nev,funk:(ESZAM_LEIRASOK[kod]||["Adalékanyag"])[0],magy:(ESZAM_LEIRASOK[kod]||["","A pontos technológiai szerepet a csomagolás összetevőlistáján ellenőrizd. A jegyzékben szereplés nem jelent korlátlan felhasználhatóságot."])[1]}]));
+
+// 1.4: közérthető technológiai magyarázatok és ellenőrzött felismerési nevek.
+var ESZAM_RESZLETEK = [
+  {
+    "kod": "E-100",
+    "funk": "Színezék",
+    "magy": "Sárga színt adhat az élelmiszernek. A kurkumin a kurkumában is előforduló színanyag.",
+    "aliases": [
+      "kurkumin",
+      "curcumin"
+    ]
+  },
+  {
+    "kod": "E-101",
+    "funk": "Színezék",
+    "magy": "Sárgás színt adhat a terméknek; a riboflavin B2-vitamin néven is ismert.",
+    "aliases": [
+      "riboflavin",
+      "riboflavinok"
+    ]
+  },
+  {
+    "kod": "E-102",
+    "funk": "Színezék",
+    "magy": "Sárga színt alakít ki. A gyermekek aktivitásával és figyelmével kapcsolatos külön címkejelölés hat érintett színezékének egyike.",
+    "aliases": [
+      "tartrazin",
+      "tartrazine"
+    ]
+  },
+  {
+    "kod": "E-104",
+    "funk": "Színezék",
+    "magy": "Sárga szín kialakítására szolgál. A hat, gyermekekkel kapcsolatos külön címkefigyelmeztetéshez kötött színezék egyike; a címkét és a jogszabály kivételeit is ellenőrizni kell.",
+    "aliases": [
+      "kinolinsárga",
+      "kinolin-sárga",
+      "quinoline yellow"
+    ]
+  },
+  {
+    "kod": "E-110",
+    "funk": "Színezék",
+    "magy": "Narancssárga színt adhat. A gyermekek aktivitásával és figyelmével kapcsolatos külön címkefigyelmeztetéshez tartozó hat színezék egyike.",
+    "aliases": [
+      "narancssárga s",
+      "sunset yellow fcf"
+    ]
+  },
+  {
+    "kod": "E-120",
+    "funk": "Színezék",
+    "magy": "Vörös színt adhat; rovareredetű színanyag. Az eredet és a személyes kerülőlista szempontjából is érdemes megnézni a jelölést.",
+    "aliases": [
+      "kármin",
+      "kárminok",
+      "kárminsav",
+      "carminic acid",
+      "carmine"
+    ]
+  },
+  {
+    "kod": "E-122",
+    "funk": "Színezék",
+    "magy": "Vörös szín kialakítására használják. A gyermekekkel kapcsolatos külön címkefigyelmeztetés hat érintett színezékének egyike.",
+    "aliases": [
+      "azorubin",
+      "karmazsin",
+      "karmozin",
+      "carmoisine"
+    ]
+  },
+  {
+    "kod": "E-124",
+    "funk": "Színezék",
+    "magy": "Vörös színt adhat. A gyermekek aktivitásával és figyelmével kapcsolatos külön címkejelölés hat érintett színezékének egyike.",
+    "aliases": [
+      "ponceau 4r",
+      "kosnilvörös a"
+    ]
+  },
+  {
+    "kod": "E-129",
+    "funk": "Színezék",
+    "magy": "Vörös színt adhat az élelmiszernek. A gyermekekkel kapcsolatos külön címkefigyelmeztetés hat érintett színezékének egyike.",
+    "aliases": [
+      "alluravörös ac",
+      "allura red ac",
+      "allura-vörös"
+    ]
+  },
+  {
+    "kod": "E-133",
+    "funk": "Színezék",
+    "magy": "Kék szín kialakítására használják. Nem tartozik a hat, gyermekek aktivitásával és figyelmével kapcsolatos külön címkefigyelmeztetésben felsorolt színezék közé.",
+    "aliases": [
+      "brillantkék fcf",
+      "brilliant blue fcf"
+    ]
+  },
+  {
+    "kod": "E-140",
+    "funk": "Színezék",
+    "magy": "Zöld színt alakíthat ki a termékben. A klorofillok növényi zöld színanyagok.",
+    "aliases": [
+      "klorofillok",
+      "klorofill",
+      "chlorophylls"
+    ]
+  },
+  {
+    "kod": "E-150a",
+    "funk": "Színezék",
+    "magy": "Barna színt adó karamellszínezék. A karamellszín különböző előállítású típusait az a, b, c és d betű különbözteti meg.",
+    "aliases": [
+      "egyszerű karamell",
+      "sima karamell"
+    ]
+  },
+  {
+    "kod": "E-150b",
+    "funk": "Színezék",
+    "magy": "Barna színt adó, szulfitos eljárással készített karamellszínezék. Az allergénjelölést az adott csomagoláson ellenőrizd.",
+    "aliases": [
+      "szulfitos karamell"
+    ]
+  },
+  {
+    "kod": "E-150c",
+    "funk": "Színezék",
+    "magy": "Barna szín kialakítására használják; ammóniás eljárással készített karamellszínezék.",
+    "aliases": [
+      "ammóniás karamell"
+    ]
+  },
+  {
+    "kod": "E-150d",
+    "funk": "Színezék",
+    "magy": "Barna színt adó, ammóniás-szulfitos eljárással készített karamellszínezék. Az allergénjelölést a csomagoláson ellenőrizd.",
+    "aliases": [
+      "ammóniás-szulfitos karamell"
+    ]
+  },
+  {
+    "kod": "E-153",
+    "funk": "Színezék",
+    "magy": "Fekete szín kialakítására szolgáló növényi szén.",
+    "aliases": [
+      "növényi szén",
+      "vegetable carbon"
+    ]
+  },
+  {
+    "kod": "E-160a",
+    "funk": "Színezék",
+    "magy": "Sárgás-narancssárga színt adó karotinok. A kód több rokon színanyagot fog össze.",
+    "aliases": [
+      "karotinok",
+      "béta-karotin",
+      "beta-carotene"
+    ]
+  },
+  {
+    "kod": "E-160c",
+    "funk": "Színezék",
+    "magy": "Paprikából származó színanyagokkal narancsos-vöröses árnyalatot alakít ki.",
+    "aliases": [
+      "paprikakivonat",
+      "paprika extract",
+      "kapszantin"
+    ]
+  },
+  {
+    "kod": "E-160d",
+    "funk": "Színezék",
+    "magy": "Vörös színt adó likopin; a paradicsom jellegzetes színanyagai között is megtalálható.",
+    "aliases": [
+      "likopin",
+      "lycopene"
+    ]
+  },
+  {
+    "kod": "E-162",
+    "funk": "Színezék",
+    "magy": "Céklából származó vörös színanyaggal színezi a terméket.",
+    "aliases": [
+      "céklavörös",
+      "betanin",
+      "beetroot red"
+    ]
+  },
+  {
+    "kod": "E-163",
+    "funk": "Színezék",
+    "magy": "Vöröses, lilás vagy kékes színt adó antociánok. A megjelenő árnyalatot az élelmiszer közege is befolyásolja.",
+    "aliases": [
+      "antociánok",
+      "antocianinok",
+      "anthocyanins"
+    ]
+  },
+  {
+    "kod": "E-170",
+    "funk": "Színezék, savanyúságot szabályozó anyag",
+    "magy": "Kalcium-karbonát; fehér szín kialakítására vagy a savasság beállítására is szolgálhat. A tényleges funkciót a címke adja meg.",
+    "aliases": [
+      "kalcium-karbonát",
+      "calcium carbonate"
+    ]
+  },
+  {
+    "kod": "E-200",
+    "funk": "Tartósítószer",
+    "magy": "Az eltarthatóságot segíti, például élesztők és penészek szaporodásának gátlásával.",
+    "aliases": [
+      "szorbinsav",
+      "sorbic acid"
+    ]
+  },
+  {
+    "kod": "E-202",
+    "funk": "Tartósítószer",
+    "magy": "A szorbinsav káliumsója. A mikroorganizmusok szaporodásának gátlásával segíti az eltarthatóságot.",
+    "aliases": [
+      "kálium-szorbát",
+      "potassium sorbate"
+    ]
+  },
+  {
+    "kod": "E-210",
+    "funk": "Tartósítószer",
+    "magy": "Benzoesav; mikroorganizmusok szaporodásának gátlására használható. A használat feltételei élelmiszertípusonként eltérnek.",
+    "aliases": [
+      "benzoesav",
+      "benzoic acid"
+    ]
+  },
+  {
+    "kod": "E-211",
+    "funk": "Tartósítószer",
+    "magy": "A benzoesav nátriumsója; a tartósítást segíti. A kód önmagában nem ad információt a felhasznált mennyiségről.",
+    "aliases": [
+      "nátrium-benzoát",
+      "sodium benzoate"
+    ]
+  },
+  {
+    "kod": "E-212",
+    "funk": "Tartósítószer",
+    "magy": "A benzoesav káliumsója; az eltarthatóságot segítő tartósítószer.",
+    "aliases": [
+      "kálium-benzoát",
+      "potassium benzoate"
+    ]
+  },
+  {
+    "kod": "E-213",
+    "funk": "Tartósítószer",
+    "magy": "A benzoesav kalciumsója; mikroorganizmusok szaporodásának gátlására használják.",
+    "aliases": [
+      "kalcium-benzoát",
+      "calcium benzoate"
+    ]
+  },
+  {
+    "kod": "E-220",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Tartósításhoz és az oxidáció lassításához használható kén-dioxid. A szulfitokra vonatkozó allergénjelölést a teljes címkén ellenőrizd.",
+    "aliases": [
+      "kén-dioxid",
+      "sulphur dioxide",
+      "sulfur dioxide"
+    ]
+  },
+  {
+    "kod": "E-221",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Nátrium-szulfit; az eltarthatóság és az oxidáció elleni védelem érdekében használható. A szulfitjelölést ellenőrizd.",
+    "aliases": [
+      "nátrium-szulfit",
+      "sodium sulphite",
+      "sodium sulfite"
+    ]
+  },
+  {
+    "kod": "E-222",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Nátrium-hidrogén-szulfit; szulfitvegyület, amely tartósítást és az oxidáció lassítását szolgálhatja.",
+    "aliases": [
+      "nátrium-hidrogén-szulfit",
+      "sodium hydrogen sulphite"
+    ]
+  },
+  {
+    "kod": "E-223",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Nátrium-metabiszulfit; a szulfitok közé tartozó anyag. A csomagolás allergénjelölését is nézd meg.",
+    "aliases": [
+      "nátrium-metabiszulfit",
+      "sodium metabisulphite",
+      "sodium metabisulfite"
+    ]
+  },
+  {
+    "kod": "E-224",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Kálium-metabiszulfit; tartósításra és az oxidáció lassítására használható szulfitvegyület.",
+    "aliases": [
+      "kálium-metabiszulfit",
+      "potassium metabisulphite"
+    ]
+  },
+  {
+    "kod": "E-226",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Kalcium-szulfit; a szulfitok közé tartozó anyag. A személyes allergénbeállítással és a teljes címkével együtt értelmezd.",
+    "aliases": [
+      "kalcium-szulfit",
+      "calcium sulphite"
+    ]
+  },
+  {
+    "kod": "E-227",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Kalcium-hidrogén-szulfit; tartósítást segítő szulfitvegyület. Ellenőrizd a szulfitokra vonatkozó jelölést.",
+    "aliases": [
+      "kalcium-hidrogén-szulfit",
+      "calcium hydrogen sulphite"
+    ]
+  },
+  {
+    "kod": "E-228",
+    "funk": "Tartósítószer, antioxidáns",
+    "magy": "Kálium-hidrogén-szulfit; az eltarthatóságot és az oxidáció elleni védelmet segítheti. A szulfitjelölést ellenőrizd.",
+    "aliases": [
+      "kálium-hidrogén-szulfit",
+      "potassium hydrogen sulphite"
+    ]
+  },
+  {
+    "kod": "E-234",
+    "funk": "Tartósítószer",
+    "magy": "Nizin; egyes baktériumok szaporodásának gátlására szolgáló anyag. Felhasználása terméktípushoz és feltételekhez kötött.",
+    "aliases": [
+      "nizin",
+      "nisin"
+    ]
+  },
+  {
+    "kod": "E-235",
+    "funk": "Tartósítószer",
+    "magy": "Natamicin; gombák szaporodásának gátlására, meghatározott termékek felületi kezelésére használható.",
+    "aliases": [
+      "natamicin",
+      "natamycin",
+      "pimaricin"
+    ]
+  },
+  {
+    "kod": "E-249",
+    "funk": "Tartósítószer",
+    "magy": "Kálium-nitrit; meghatározott pácolt húskészítmények tartósításában és jellegzetes színének kialakításában használható. A felhasználás szabályozott.",
+    "aliases": [
+      "kálium-nitrit",
+      "potassium nitrite"
+    ]
+  },
+  {
+    "kod": "E-250",
+    "funk": "Tartósítószer",
+    "magy": "Nátrium-nitrit; egyes pácolt húskészítmények tartósítását és színkialakítását szolgálja. A kód nem árulja el a termékben lévő mennyiséget.",
+    "aliases": [
+      "nátrium-nitrit",
+      "sodium nitrite"
+    ]
+  },
+  {
+    "kod": "E-251",
+    "funk": "Tartósítószer",
+    "magy": "Nátrium-nitrát; meghatározott élelmiszerek tartósításában használható. Nem azonos az E250 nátrium-nitrittel.",
+    "aliases": [
+      "nátrium-nitrát",
+      "sodium nitrate"
+    ]
+  },
+  {
+    "kod": "E-252",
+    "funk": "Tartósítószer",
+    "magy": "Kálium-nitrát; meghatározott termékek tartósítását segítheti. A nitrátok és nitritek külön kódokat kapnak.",
+    "aliases": [
+      "kálium-nitrát",
+      "potassium nitrate"
+    ]
+  },
+  {
+    "kod": "E-260",
+    "funk": "Savanyúságot szabályozó anyag, tartósítószer",
+    "magy": "Ecetsav; az íz és a savasság beállítását, illetve a tartósítást szolgálhatja.",
+    "aliases": [
+      "ecetsav",
+      "acetic acid"
+    ]
+  },
+  {
+    "kod": "E-261",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kálium-acetát; az ecetsav káliumsója. A savasság beállításában használható.",
+    "aliases": [
+      "kálium-acetát",
+      "potassium acetate"
+    ]
+  },
+  {
+    "kod": "E-262",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Nátrium-acetátok; az ecetsav sói. Savasságszabályozásra és egyes termékek tartósításának támogatására használhatók.",
+    "aliases": [
+      "nátrium-acetát",
+      "nátrium-acetátok",
+      "sodium acetates"
+    ]
+  },
+  {
+    "kod": "E-263",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kalcium-acetát; az ecetsav kalciumsója. A termék savasságának beállítását szolgálhatja.",
+    "aliases": [
+      "kalcium-acetát",
+      "calcium acetate"
+    ]
+  },
+  {
+    "kod": "E-270",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Tejsav; az íz és a savasság beállítására használják. A tejsav neve önmagában nem bizonyít tejösszetevőt vagy tejfehérjét.",
+    "aliases": [
+      "tejsav",
+      "lactic acid"
+    ]
+  },
+  {
+    "kod": "E-280",
+    "funk": "Tartósítószer",
+    "magy": "Propionsav; a penészek szaporodásának gátlásával segítheti az eltarthatóságot.",
+    "aliases": [
+      "propionsav",
+      "propionic acid"
+    ]
+  },
+  {
+    "kod": "E-281",
+    "funk": "Tartósítószer",
+    "magy": "Nátrium-propionát; a propionsav nátriumsója, az eltarthatóságot segítheti.",
+    "aliases": [
+      "nátrium-propionát",
+      "sodium propionate"
+    ]
+  },
+  {
+    "kod": "E-282",
+    "funk": "Tartósítószer",
+    "magy": "Kalcium-propionát; a propionsav sója, a penészedés gátlására is használható.",
+    "aliases": [
+      "kalcium-propionát",
+      "calcium propionate"
+    ]
+  },
+  {
+    "kod": "E-283",
+    "funk": "Tartósítószer",
+    "magy": "Kálium-propionát; a propionsav sója, tartósítószerként használható.",
+    "aliases": [
+      "kálium-propionát",
+      "potassium propionate"
+    ]
+  },
+  {
+    "kod": "E-290",
+    "funk": "Csomagológáz, szén-dioxid",
+    "magy": "Gázként az italok szénsavasságának kialakítására vagy csomagolási célra is szolgálhat. A konkrét szerepet a termék jelölése adja meg.",
+    "aliases": [
+      "szén-dioxid",
+      "carbon dioxide"
+    ]
+  },
+  {
+    "kod": "E-296",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Almasav; savanykás ízt és megfelelő savasságot alakíthat ki a termékben.",
+    "aliases": [
+      "almasav",
+      "malic acid"
+    ]
+  },
+  {
+    "kod": "E-297",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Fumársav; a savasság és az íz beállítására használható.",
+    "aliases": [
+      "fumársav",
+      "fumaric acid"
+    ]
+  },
+  {
+    "kod": "E-300",
+    "funk": "Antioxidáns",
+    "magy": "Aszkorbinsav, más néven C-vitamin. Adalékanyagként az oxidáció és az ezzel járó minőségváltozás lassítására használják.",
+    "aliases": [
+      "aszkorbinsav",
+      "ascorbic acid"
+    ]
+  },
+  {
+    "kod": "E-301",
+    "funk": "Antioxidáns",
+    "magy": "Nátrium-aszkorbát; az aszkorbinsav nátriumsója. Segíti az oxidáció lassítását.",
+    "aliases": [
+      "nátrium-aszkorbát",
+      "sodium ascorbate"
+    ]
+  },
+  {
+    "kod": "E-302",
+    "funk": "Antioxidáns",
+    "magy": "Kalcium-aszkorbát; az aszkorbinsav kalciumsója. Az oxidáció elleni védelmet szolgálja.",
+    "aliases": [
+      "kalcium-aszkorbát",
+      "calcium ascorbate"
+    ]
+  },
+  {
+    "kod": "E-306",
+    "funk": "Antioxidáns",
+    "magy": "Tokoferolban gazdag kivonat; zsiradékok oxidációjának lassítására használható.",
+    "aliases": [
+      "tokoferolban gazdag kivonat",
+      "tocopherol-rich extract"
+    ]
+  },
+  {
+    "kod": "E-307",
+    "funk": "Antioxidáns",
+    "magy": "Alfa-tokoferol; az E-vitamin-csoport egyik tagja. A termék oxidációjának lassítását szolgálhatja.",
+    "aliases": [
+      "alfa-tokoferol",
+      "alpha-tocopherol"
+    ]
+  },
+  {
+    "kod": "E-315",
+    "funk": "Antioxidáns",
+    "magy": "Eritorbinsav; az oxidáció lassítására használt anyag, többek között egyes húskészítményeknél.",
+    "aliases": [
+      "eritorbinsav",
+      "erythorbic acid"
+    ]
+  },
+  {
+    "kod": "E-316",
+    "funk": "Antioxidáns",
+    "magy": "Nátrium-eritorbát; az eritorbinsav sója. Az oxidáció lassítását szolgálhatja.",
+    "aliases": [
+      "nátrium-eritorbát",
+      "sodium erythorbate"
+    ]
+  },
+  {
+    "kod": "E-322",
+    "funk": "Emulgeálószer",
+    "magy": "Lecitinek; segítik például a zsír és a víz egyenletes keveredését. Lehet szója-, tojás- vagy más eredetű; az allergént a megadott forrásból kell megállapítani.",
+    "aliases": [
+      "lecitin",
+      "lecitinek",
+      "szójalecitin",
+      "napraforgólecitin",
+      "lecithin",
+      "lecithins"
+    ]
+  },
+  {
+    "kod": "E-325",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Nátrium-laktát; a tejsav sója. A savasság és a termék tulajdonságainak beállítását szolgálhatja. A laktát név önmagában nem jelenti tejfehérje jelenlétét.",
+    "aliases": [
+      "nátrium-laktát",
+      "sodium lactate"
+    ]
+  },
+  {
+    "kod": "E-326",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kálium-laktát; a tejsav káliumsója. A savasság szabályozásában használható.",
+    "aliases": [
+      "kálium-laktát",
+      "potassium lactate"
+    ]
+  },
+  {
+    "kod": "E-327",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kalcium-laktát; a tejsav kalciumsója. A laktát megnevezésből nem következik önmagában tejallergén jelenléte.",
+    "aliases": [
+      "kalcium-laktát",
+      "calcium lactate"
+    ]
+  },
+  {
+    "kod": "E-330",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Citromsav; savanykás ízt és megfelelő savasságot alakít ki. A név vagy E-szám az anyagot azonosítja, nem a hozzáadott mennyiséget.",
+    "aliases": [
+      "citromsav",
+      "citric acid"
+    ]
+  },
+  {
+    "kod": "E-331",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Nátrium-citrátok; a citromsav sói. A savasság beállításában és a termék állagának kialakításában is szerepet kaphatnak.",
+    "aliases": [
+      "nátrium-citrát",
+      "nátrium-citrátok",
+      "sodium citrates"
+    ]
+  },
+  {
+    "kod": "E-332",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kálium-citrátok; a citromsav káliumsói. A savasság szabályozására használhatók.",
+    "aliases": [
+      "kálium-citrát",
+      "kálium-citrátok",
+      "potassium citrates"
+    ]
+  },
+  {
+    "kod": "E-333",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kalcium-citrátok; a citromsav kalciumsói. A termékben betöltött szerepet a címke szerinti funkcióval együtt értelmezd.",
+    "aliases": [
+      "kalcium-citrát",
+      "kalcium-citrátok",
+      "calcium citrates"
+    ]
+  },
+  {
+    "kod": "E-334",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Borkősav; a savasság és az íz beállítására használt sav.",
+    "aliases": [
+      "borkősav",
+      "tartaric acid"
+    ]
+  },
+  {
+    "kod": "E-338",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Foszforsav; savanykás ízt és megfelelő savasságot alakíthat ki. A kódból a termék foszfortartalma nem számítható ki.",
+    "aliases": [
+      "foszforsav",
+      "phosphoric acid"
+    ]
+  },
+  {
+    "kod": "E-339",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Nátrium-foszfátok; többek között savasságszabályozásra és a termék tulajdonságainak beállítására szolgálhatnak.",
+    "aliases": [
+      "nátrium-foszfát",
+      "nátrium-foszfátok",
+      "sodium phosphates"
+    ]
+  },
+  {
+    "kod": "E-340",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kálium-foszfátok; a foszforsav sói. Pontos technológiai szerepüket a termék címkéje mutatja meg.",
+    "aliases": [
+      "kálium-foszfát",
+      "kálium-foszfátok",
+      "potassium phosphates"
+    ]
+  },
+  {
+    "kod": "E-341",
+    "funk": "Savanyúságot szabályozó anyag",
+    "magy": "Kalcium-foszfátok; savasságszabályozásban és más technológiai feladatokban használhatók. A kód nem önmagában táplálkozási ajánlás.",
+    "aliases": [
+      "kalcium-foszfát",
+      "kalcium-foszfátok",
+      "calcium phosphates"
+    ]
+  },
+  {
+    "kod": "E-406",
+    "funk": "Zselésítőanyag",
+    "magy": "Agar; algákból nyert anyag, amellyel zselés állagot lehet kialakítani.",
+    "aliases": [
+      "agar",
+      "agar-agar"
+    ]
+  },
+  {
+    "kod": "E-407",
+    "funk": "Sűrítőanyag, zselésítőanyag",
+    "magy": "Karragén; algákból nyert anyag, amely az állagot és a stabilitást segítheti.",
+    "aliases": [
+      "karragén",
+      "carrageenan"
+    ]
+  },
+  {
+    "kod": "E-410",
+    "funk": "Sűrítőanyag",
+    "magy": "Szentjánoskenyérmag-liszt; a termék sűrítését és állagának stabilizálását szolgálhatja.",
+    "aliases": [
+      "szentjánoskenyérmag-liszt",
+      "locust bean gum"
+    ]
+  },
+  {
+    "kod": "E-412",
+    "funk": "Sűrítőanyag",
+    "magy": "Guargumi; sűrűbb állagot alakít ki és segíthet a termék szerkezetének megőrzésében.",
+    "aliases": [
+      "guargumi",
+      "guar gum"
+    ]
+  },
+  {
+    "kod": "E-414",
+    "funk": "Sűrítőanyag, stabilizátor",
+    "magy": "Gumiarábikum; akáciagumiként is ismert, a termék állagát és egyenletes szerkezetét segítheti.",
+    "aliases": [
+      "gumiarábikum",
+      "gumiarábik",
+      "akáciagumi",
+      "gum arabic",
+      "acacia gum"
+    ]
+  },
+  {
+    "kod": "E-415",
+    "funk": "Sűrítőanyag",
+    "magy": "Xantángumi; kis mennyiségben is sűrítheti a terméket és segítheti az állag megtartását.",
+    "aliases": [
+      "xantángumi",
+      "xantán",
+      "xanthan gum"
+    ]
+  },
+  {
+    "kod": "E-420",
+    "funk": "Édesítőszer, nedvesítőszer",
+    "magy": "Szorbit; cukoralkohol, amely édesítésre és a nedvesség megtartására is szolgálhat. A konkrét szerepet a címkén ellenőrizd.",
+    "aliases": [
+      "szorbit",
+      "szorbitok",
+      "sorbitol"
+    ]
+  },
+  {
+    "kod": "E-421",
+    "funk": "Édesítőszer",
+    "magy": "Mannit; a cukoralkoholok közé tartozó édesítőszer.",
+    "aliases": [
+      "mannit",
+      "mannitol"
+    ]
+  },
+  {
+    "kod": "E-440",
+    "funk": "Zselésítőanyag",
+    "magy": "Pektinek; növényi eredetű anyagok, amelyek zselés állagot alakíthatnak ki, például gyümölcskészítményekben.",
+    "aliases": [
+      "pektin",
+      "pektinek",
+      "pectin",
+      "pectins"
+    ]
+  },
+  {
+    "kod": "E-450",
+    "funk": "Stabilizátor, térfogatnövelő szer",
+    "magy": "Difoszfátok; a termék típusától függően az állag beállításában vagy a tészta lazításában is szerepet kaphatnak.",
+    "aliases": [
+      "difoszfátok",
+      "diphosphates"
+    ]
+  },
+  {
+    "kod": "E-451",
+    "funk": "Stabilizátor",
+    "magy": "Trifoszfátok; a termék szerkezetének, vízmegkötésének és egyenletes állagának kialakítását szolgálhatják.",
+    "aliases": [
+      "trifoszfátok",
+      "triphosphates"
+    ]
+  },
+  {
+    "kod": "E-452",
+    "funk": "Stabilizátor",
+    "magy": "Polifoszfátok; az állag és egyes fizikai tulajdonságok fenntartására használhatók. A kód nem mutatja meg a mennyiséget.",
+    "aliases": [
+      "polifoszfátok",
+      "polyphosphates"
+    ]
+  },
+  {
+    "kod": "E-460",
+    "funk": "Tömegnövelő szer, stabilizátor",
+    "magy": "Cellulóz; növényi sejtfalakban is előforduló anyag. A termék tömegét, szerkezetét vagy állagát alakíthatja.",
+    "aliases": [
+      "cellulóz",
+      "cellulose"
+    ]
+  },
+  {
+    "kod": "E-466",
+    "funk": "Sűrítőanyag",
+    "magy": "Karboxi-metil-cellulóz, illetve cellulózgumi; a termék sűrítésében és stabilizálásában használható.",
+    "aliases": [
+      "karboxi-metil-cellulóz",
+      "cellulózgumi",
+      "cellulose gum"
+    ]
+  },
+  {
+    "kod": "E-471",
+    "funk": "Emulgeálószer",
+    "magy": "Zsírsavak mono- és digliceridjei; segítik a nehezen keveredő összetevők egyenletes eloszlását. Növényi vagy állati eredet a kódból nem dönthető el.",
+    "aliases": [
+      "zsírsavak mono- és digliceridjei",
+      "mono- és digliceridek"
+    ]
+  },
+  {
+    "kod": "E-500",
+    "funk": "Térfogatnövelő szer",
+    "magy": "Nátrium-karbonátok; tészták lazítására és savasságszabályozásra is használhatók. Az alcsoport és a címkén megadott név pontosíthatja az anyagot.",
+    "aliases": [
+      "nátrium-karbonátok",
+      "sodium carbonates"
+    ]
+  },
+  {
+    "kod": "E-500(ii)",
+    "funk": "Térfogatnövelő szer",
+    "magy": "Nátrium-hidrogén-karbonát, közismert nevén szódabikarbóna. Megfelelő körülmények között gázt fejlesztve lazítja a tésztát.",
+    "aliases": [
+      "szódabikarbóna",
+      "nátrium-hidrogén-karbonát",
+      "nátrium-bikarbonát",
+      "sodium bicarbonate"
+    ]
+  },
+  {
+    "kod": "E-501",
+    "funk": "Térfogatnövelő szer",
+    "magy": "Kálium-karbonátok; a tészta lazításában és a savasság beállításában használhatók.",
+    "aliases": [
+      "kálium-karbonátok",
+      "potassium carbonates"
+    ]
+  },
+  {
+    "kod": "E-503",
+    "funk": "Térfogatnövelő szer",
+    "magy": "Ammónium-karbonátok; sütéskor gázt fejlesztenek, ezzel segíthetik a tészta lazítását.",
+    "aliases": [
+      "ammónium-karbonátok",
+      "ammonium carbonates"
+    ]
+  },
+  {
+    "kod": "E-508",
+    "funk": "Szilárdítóanyag",
+    "magy": "Kálium-klorid; a termék fizikai tulajdonságainak beállítására is használható. Nem azonos a nátrium-kloriddal, azaz az étkezési sóval.",
+    "aliases": [
+      "kálium-klorid",
+      "potassium chloride"
+    ]
+  },
+  {
+    "kod": "E-509",
+    "funk": "Szilárdítóanyag",
+    "magy": "Kalcium-klorid; segíthet egyes élelmiszerek szilárd állagának kialakításában vagy megtartásában.",
+    "aliases": [
+      "kalcium-klorid",
+      "calcium chloride"
+    ]
+  },
+  {
+    "kod": "E-551",
+    "funk": "Csomósodást gátló anyag",
+    "magy": "Szilícium-dioxid; porok és szemcsés termékek összetapadását csökkentheti.",
+    "aliases": [
+      "szilícium-dioxid",
+      "silicon dioxide"
+    ]
+  },
+  {
+    "kod": "E-621",
+    "funk": "Ízfokozó",
+    "magy": "Mononátrium-glutamát; az umami ízérzetet erősíti. A glutamát nem azonos a gluténnel; neve önmagában nem jelent gluténtartalmat.",
+    "aliases": [
+      "mononátrium-glutamát",
+      "nátrium-glutamát",
+      "monosodium glutamate",
+      "msg"
+    ]
+  },
+  {
+    "kod": "E-627",
+    "funk": "Ízfokozó",
+    "magy": "Dinátrium-guanilát; az élelmiszer ízérzetének fokozására használják.",
+    "aliases": [
+      "dinátrium-guanilát",
+      "disodium guanylate"
+    ]
+  },
+  {
+    "kod": "E-631",
+    "funk": "Ízfokozó",
+    "magy": "Dinátrium-inozinát; az umami jellegű ízérzet erősítésére használható.",
+    "aliases": [
+      "dinátrium-inozinát",
+      "disodium inosinate"
+    ]
+  },
+  {
+    "kod": "E-635",
+    "funk": "Ízfokozó",
+    "magy": "Dinátrium-ribonukleotidok; ízfokozó anyagok keverékét jelölő kód.",
+    "aliases": [
+      "dinátrium-ribonukleotidok",
+      "dinátrium-5-ribonukleotidok"
+    ]
+  },
+  {
+    "kod": "E-900",
+    "funk": "Habzásgátló",
+    "magy": "Dimetil-polisziloxán; az élelmiszer előállításakor keletkező hab kialakulását vagy fennmaradását csökkentheti.",
+    "aliases": [
+      "dimetil-polisziloxán",
+      "polidimetil-sziloxán",
+      "dimethyl polysiloxane"
+    ]
+  },
+  {
+    "kod": "E-901",
+    "funk": "Fényezőanyag",
+    "magy": "Méhviasz; védő vagy fényes bevonatot alakíthat ki. Állati eredetű anyag, amit a személyes kerülőlistánál figyelembe lehet venni.",
+    "aliases": [
+      "méhviasz",
+      "beeswax"
+    ]
+  },
+  {
+    "kod": "E-903",
+    "funk": "Fényezőanyag",
+    "magy": "Karnaubaviasz; növényi viasz, amellyel fényes vagy védő bevonat alakítható ki.",
+    "aliases": [
+      "karnaubaviasz",
+      "carnauba wax"
+    ]
+  },
+  {
+    "kod": "E-904",
+    "funk": "Fényezőanyag",
+    "magy": "Sellak; rovareredetű gyantából készülő bevonóanyag. A termék fényes felületének kialakítására használható.",
+    "aliases": [
+      "sellak",
+      "shellac"
+    ]
+  },
+  {
+    "kod": "E-920",
+    "funk": "Lisztkezelőszer",
+    "magy": "L-cisztein; a tészta feldolgozhatóságát alakíthatja. Az eredet a kódból önmagában nem állapítható meg.",
+    "aliases": [
+      "l-cisztein",
+      "l-cysteine"
+    ]
+  },
+  {
+    "kod": "E-941",
+    "funk": "Csomagológáz",
+    "magy": "Nitrogén; a csomagolás légterének kialakítására használható gáz.",
+    "aliases": [
+      "nitrogén",
+      "nitrogen"
+    ]
+  },
+  {
+    "kod": "E-942",
+    "funk": "Hajtógáz",
+    "magy": "Dinitrogén-oxid; például habosított termékek adagolásának hajtógáza lehet.",
+    "aliases": [
+      "dinitrogén-oxid",
+      "nitrous oxide"
+    ]
+  },
+  {
+    "kod": "E-950",
+    "funk": "Édesítőszer",
+    "magy": "Aceszulfám-K; édes ízt ad a terméknek. Az édesítőszer jelenlétéből önmagában nem számítható ki a termék energiatartalma.",
+    "aliases": [
+      "aceszulfám-k",
+      "aceszulfám kálium",
+      "acesulfame k"
+    ]
+  },
+  {
+    "kod": "E-951",
+    "funk": "Édesítőszer",
+    "magy": "Aszpartám; fenilalanin-forrás. PKU-beállítás esetén a program külön címkeellenőrzési figyelmeztetést mutat.",
+    "aliases": [
+      "aszpartám",
+      "aspartame"
+    ]
+  },
+  {
+    "kod": "E-952",
+    "funk": "Édesítőszer",
+    "magy": "Ciklaminsav és sói; édes íz kialakítására szolgáló édesítőszerek.",
+    "aliases": [
+      "ciklaminsav",
+      "ciklamátok",
+      "cyclamic acid"
+    ]
+  },
+  {
+    "kod": "E-953",
+    "funk": "Édesítőszer",
+    "magy": "Izomalt; a cukoralkoholok közé tartozó édesítőszer. Az elfogyasztott mennyiség és az egyéni tolerancia is számít.",
+    "aliases": [
+      "izomalt",
+      "isomalt"
+    ]
+  },
+  {
+    "kod": "E-954",
+    "funk": "Édesítőszer",
+    "magy": "Szacharin és sói; édes íz kialakítására használhatók.",
+    "aliases": [
+      "szacharin",
+      "saccharin"
+    ]
+  },
+  {
+    "kod": "E-955",
+    "funk": "Édesítőszer",
+    "magy": "Szukralóz; édes ízt adhat az élelmiszernek. A kód az anyagot azonosítja, nem az egész termék tápértékét.",
+    "aliases": [
+      "szukralóz",
+      "sucralose"
+    ]
+  },
+  {
+    "kod": "E-957",
+    "funk": "Édesítőszer",
+    "magy": "Taumatin; édes íz kialakítására használt fehérje.",
+    "aliases": [
+      "taumatin",
+      "thaumatin"
+    ]
+  },
+  {
+    "kod": "E-959",
+    "funk": "Édesítőszer",
+    "magy": "Neoheszperidin DC; édes íz kialakítására használható anyag.",
+    "aliases": [
+      "neoheszperidin dc",
+      "neohesperidin dc"
+    ]
+  },
+  {
+    "kod": "E-960a",
+    "funk": "Édesítőszer",
+    "magy": "Szteviol-glikozidok szteviából; édes íz kialakítására használhatók. Az E960 betűs alcsoportjai az előállítás módját is megkülönböztetik.",
+    "aliases": [
+      "szteviol-glikozidok szteviából",
+      "steviol glycosides from stevia"
+    ]
+  },
+  {
+    "kod": "E-961",
+    "funk": "Édesítőszer",
+    "magy": "Neotám; édes íz kialakítására használt anyag. Nem kap automatikusan PKU-jelzést pusztán az aszpartámmal való kémiai rokonság miatt.",
+    "aliases": [
+      "neotám",
+      "neotame"
+    ]
+  },
+  {
+    "kod": "E-962",
+    "funk": "Édesítőszer",
+    "magy": "Aszpartám-aceszulfám só; aszpartámot is tartalmazó édesítőszer. A fenilalaninra vonatkozó címkejelölést ellenőrizd.",
+    "aliases": [
+      "aszpartám-aceszulfám só",
+      "salt of aspartame-acesulfame"
+    ]
+  },
+  {
+    "kod": "E-965",
+    "funk": "Édesítőszer",
+    "magy": "Maltit; cukoralkohol, amelyet édesítésre használnak. A termék címkéjén lévő külön figyelmeztetéseket is nézd meg.",
+    "aliases": [
+      "maltit",
+      "maltitol"
+    ]
+  },
+  {
+    "kod": "E-966",
+    "funk": "Édesítőszer",
+    "magy": "Laktit; a cukoralkoholok közé tartozó édesítőszer. A neve önmagában nem tejfehérje-jelölés.",
+    "aliases": [
+      "laktit",
+      "lactitol"
+    ]
+  },
+  {
+    "kod": "E-967",
+    "funk": "Édesítőszer",
+    "magy": "Xilit; cukoralkohol, amely édes ízt ad a terméknek. A nyírfacukor elnevezés is erre az anyagra utalhat.",
+    "aliases": [
+      "xilit",
+      "xilitol",
+      "nyírfacukor",
+      "xylitol"
+    ]
+  },
+  {
+    "kod": "E-968",
+    "funk": "Édesítőszer",
+    "magy": "Eritrit; a cukoralkoholok közé tartozó édesítőszer. A konkrét mennyiséget az E-szám nem mutatja meg.",
+    "aliases": [
+      "eritrit",
+      "erythritol"
+    ]
+  },
+  {
+    "kod": "E-1105",
+    "funk": "Tartósítószer",
+    "magy": "Lizozim; enzim, amely tartósításra használható. Tojásból származó eredet esetén az allergénforrást is figyelembe kell venni; ellenőrizd a címkét.",
+    "aliases": [
+      "lizozim",
+      "lysozyme"
+    ]
+  },
+  {
+    "kod": "E-1200",
+    "funk": "Tömegnövelő szer",
+    "magy": "Polidextróz; a termék tömegének és állagának kialakításában használható anyag.",
+    "aliases": [
+      "polidextróz",
+      "polydextrose"
+    ]
+  },
+  {
+    "kod": "E-1404",
+    "funk": "Módosított keményítő",
+    "magy": "Oxidált keményítő; a termék sűrítését és szerkezetének kialakítását segítheti.",
+    "aliases": [
+      "oxidált keményítő",
+      "oxidised starch"
+    ]
+  },
+  {
+    "kod": "E-1412",
+    "funk": "Módosított keményítő",
+    "magy": "Dikeményítő-foszfát; a megfelelő állag kialakítását és fenntartását szolgálhatja.",
+    "aliases": [
+      "dikeményítő-foszfát",
+      "distarch phosphate"
+    ]
+  },
+  {
+    "kod": "E-1414",
+    "funk": "Módosított keményítő",
+    "magy": "Acetilezett dikeményítő-foszfát; sűrítő és állagkialakító feladatot láthat el.",
+    "aliases": [
+      "acetilezett dikeményítő-foszfát",
+      "acetylated distarch phosphate"
+    ]
+  },
+  {
+    "kod": "E-1420",
+    "funk": "Módosított keményítő",
+    "magy": "Acetilezett keményítő; a termék állagának és sűrűségének beállítására használható.",
+    "aliases": [
+      "acetilezett keményítő",
+      "acetylated starch"
+    ]
+  },
+  {
+    "kod": "E-1422",
+    "funk": "Módosított keményítő",
+    "magy": "Acetilezett dikeményítő-adipát; a termék állagát és stabilitását alakíthatja.",
+    "aliases": [
+      "acetilezett dikeményítő-adipát",
+      "acetylated distarch adipate"
+    ]
+  },
+  {
+    "kod": "E-1442",
+    "funk": "Módosított keményítő",
+    "magy": "Hidroxipropil-dikeményítő-foszfát; sűrítésre és állagkialakításra használható.",
+    "aliases": [
+      "hidroxipropil-dikeményítő-foszfát",
+      "hydroxypropyl distarch phosphate"
+    ]
+  },
+  {
+    "kod": "E-1450",
+    "funk": "Módosított keményítő",
+    "magy": "Keményítő-nátrium-oktenil-szukcinát; a termék szerkezetének és a keverék egyenletességének kialakítását segítheti.",
+    "aliases": [
+      "keményítő-nátrium-oktenil-szukcinát",
+      "starch sodium octenyl succinate"
+    ]
+  }
+];
+var ESZAM_FORRASOK={nev:{cim:'Uniós névjegyzék · 2025-11-04',url:'https://eur-lex.europa.eu/legal-content/HU/TXT/HTML/?uri=CELEX:02008R1333-20251104'},szerep:{cim:'Technológiai szerepek · 1333/2008 I. melléklet',url:'https://eur-lex.europa.eu/eli/reg/2008/1333/oj/eng'},anyag:{cim:'Anyagazonosítás · 231/2012 specifikációk',url:'https://eur-lex.europa.eu/eli/reg/2012/231/oj/eng'}};
+ESZAM_RESZLETEK.forEach(d=>{if(!ESZAM_INDEX[d.kod]&&d.kod==='E-500(ii)')ESZAM_INDEX[d.kod]={kod:d.kod,nev:'Nátrium-hidrogén-karbonát'};if(!ESZAM_INDEX[d.kod])throw Error('Ismeretlen leíráskód: '+d.kod);Object.assign(ESZAM_INDEX[d.kod],{funk:d.funk,magy:d.magy,aliases:d.aliases,reszletes:true,forrasok:[ESZAM_FORRASOK.nev,ESZAM_FORRASOK.szerep,ESZAM_FORRASOK.anyag]})});
+Object.values(ESZAM_INDEX).forEach(e=>{if(!e.forrasok)e.forrasok=[ESZAM_FORRASOK.nev];if(!e.aliases)e.aliases=[]});
+
+// A jogszabályi szerkesztési lábjegyzet nem része az anyag nevének.
+Object.values(ESZAM_INDEX).forEach(e=>{e.nev=e.nev.replace(/\(\s*\*\d+\s*\)/g,"").trim()});

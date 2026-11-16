@@ -13,3 +13,10 @@ A 3-as baglyos terv alapján egyszerűsített SVG jel került a fejlécbe, a pro
 
 ## 1.3 könyvborító
 A kiválasztott világos borító külön nyitóképernyőként került be. Böngészőben ellenőrizve: belépés az appba, visszatérés a borítóhoz, középre igazított teljes kép. A funkcionális tesztek és a borító navigációjának ellenőrzése sikeres. Új fájlok az offline gyorsítótárban. Fizikai telefonos megjelenés külön még ellenőrizendő.
+
+## 1.4 – Bővebb kisokos és névfelismerés
+Sikeres JavaScript-szintaxisellenőrzés és regressziós teszt: új elemzo.js; 131 részletes leírás; név/E-kód ismétlődés; magyar és felvett angol elnevezések; E500(ii) altípus; névből felismert anyag saját kerülőlistás jelzése; mentes állítások, előre és hátra tagadott mondatok támogatott esetei; nyomokban jelölések többsoros változata; tejsav és tejsavópor; glutamát és glutén; földimogyoró és diófélék; szulfitkódok; XSS-karakterek; a borító és a belépés; az összes offline fájl jelenléte.
+
+Sikeres böngészős folyamat: új Névfelismerés példája gomb → áttekintés → három anyag név alapján felismerve (citromsav, xantángumi, napraforgólecitin). A tejmentes állítás nem lett közvetlen tej-találat, de a nyomokban tejet jelzés megmaradt. Kisokosban szódabikarbóna keresés → E500(ii) találat → forráshivatkozások megnyitása a kártyán. Offline kész állapot látható volt. A böngészős ellenőrzés után a megjelenített bizonyítékok kis-/nagybetűtől független ismétlődésszűrését külön regressziós teszt igazolta.
+
+A fizikai telefonkamera és repülő üzemmódos teljes folyamat továbbra sincs ebben a kiadásban külön ellenőrizve. Az algoritmus szabályalapú; nem általános természetesnyelv-megértés vagy allergénmentességi vizsgálat. Az E-szám névjegyzék jogszabályi időállapota továbbra is 2025-11-04; a bővítés technológiai magyarázatokat és felismerési neveket adott hozzá.
